@@ -8,6 +8,7 @@ jobs:
     permissions:
       contents: read
       packages: write # allow GITHUB_TOKEN to publish packages
+      id_token: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
