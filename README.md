@@ -7,7 +7,7 @@ At the moment, there is no Github API for setting social media preview images. T
 ## Installation
 
 ```bash
-npm install -g github-social-image
+npm install -g social-image
 ```
 
 ## Usage
