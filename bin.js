@@ -97,5 +97,28 @@ const argv = yargs(hideBin(process.argv))
   .argv;
 
 (async function (argv) {
+  if (!argv.password || !argv.otp) {
+    const readline = require('readline').createInterface({
+      input: process.stdin,
+      output: process.stdout
+    });
+
+    if (!argv.password) {
+      await new Promise((resolve) => readline.question('GitHub Password: ', (password) => {
+        argv.password = password;
+        resolve();
+      }));
+    }
+
+    if (!argv.otp) {
+      await new Promise((resolve) => readline.question('GitHub 2FA Code: ', (otp) => {
+        argv.otp = otp;
+        resolve();
+      }));
+    }
+
+    readline.close();
+  }
+
   require(".")(argv);
 })(argv);
