@@ -1,8 +1,8 @@
 # github-social-image
 
-CLI tool that uses the GitHub API, Puppeteer and [GitHub Socialify](https://socialify.git.ci/) to set the social image for all of your repos automatically.
+At the moment, there is no Github API for setting social media preview images. This is CLI tool that uses [@mheap](https://github.com/mheap)'s [github-social-image](https://github.com/mheap/github-social-image) to set a social image of the current repo via command.
 
-![Example](https://repository-images.githubusercontent.com/313119473/b292d400-2786-11eb-99eb-bc728973d745)
+![Example]()
 
 ## Installation
 
@@ -16,25 +16,54 @@ Authentication details can be provided in the environment or as CLI arguments
 
 | Field     | Environment Variable | CLI option    |
 | --------- | -------------------- | ------------- |
-| API token | `GITHUB_TOKEN`       | `--pat `      |
-| Username  | `GITHUB_USERNAME`    | `--username ` |
-| Password  | `GITHUB_PASSWORD`    | `--password ` |
-| OTP       | `GITHUB_OTP`         | `--otp `      |
+| Password  | `GITHUB_PASSWORD`    | `--password` |
+| OTP       | `GITHUB_OTP`         | `--otp`      |
 
 ```bash
-github-social-image --target "your-user-name"
+github-social-image \
+  --password your_password \
+  --theme dark \
+  --font inter \
+  --background plus \
+  --logo https://www.myimage.com/myimage.svg \
+  --language true \
+  --owner true \
+  --stars true \
+  --forks true \
+  --issues true \
+  --pulls true \
+  --description "This is the description of the repo" \
+  --otp 123456 
+```
+
+To debug
+
+```bash
+DEBUG=gsi:entrypoint,gsi:browser \
+github-social-image \
+  --password your_password \
+  --theme dark \
+  --font inter \
+  --background plus \
+  --logo https://www.myimage.com/myimage.svg \
+  --language true \
+  --owner true \
+  --stars true \
+  --forks true \
+  --issues true \
+  --pulls true \
+  --description "This is the description of the repo" \
+  --otp 123456 \
+  --show
 ```
 
 ### Behaviour options
 
 | Flag     | Description                                                                                                                                                                 |
 | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| username | GitHub account username                                                                                                                                                     |
 | password | GitHub account password                                                                                                                                                     |
 | otp      | One Time Password code, required for accounts that use 2FA                                                                                                                  |
-| pat      | Github API token, used to fetch a list of repos                                                                                                                             |
-| target   | User, Org or Team to update the social image for. Will update all repos that the authenticated `pat` has admin access to. To specify a team, use the format `org/team-slug` |
-| show     | Show the Puppeteer browser for debug purposes                                                                                                                               |
+| show     | Show the [Puppeteer](https://pptr.dev/) browser for debug purposes                                                                                                                               |
 
 ### Image related options
 
@@ -51,9 +80,3 @@ github-social-image --target "your-user-name"
 | issues      | Show the number of issues                   | `false`     | N/A                                                                                                                              |
 | pulls       | Show the number of pulls                    | `false`     | N/A                                                                                                                              |
 | description | Description to use                          | N/A         | Specify as `--description` to use the description from the repo, or `--description "Text Here" to use a custom description       |
-
-## FAQ
-
-### Why do you need an API token _and_ my username?
-
-This tool uses the API token for listing repos to update through the API, and the username to drive a browser and log in to your account to set the social image as this operation is not available through the API

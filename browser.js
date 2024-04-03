@@ -5,15 +5,13 @@ const debug = require("debug")("gsi:browser");
 
 const banner_filename = "./__gh_banner.png";
 
-module.exports = async (auth, repos, imageOptions) => {
+module.exports = async (auth, repo, imageOptions) => {
   debug("Launching Puppeteer");
   const browser = await puppeteer.launch({ headless: !imageOptions.show });
   const page = await browser.newPage();
   await login(auth, page);
-  for (let repo of repos) {
-    await downloadImage(repo, imageOptions, browser);
-    await updateSocialImage(repo, page);
-  }
+  await downloadImage(repo, imageOptions, browser);
+  await updateSocialImage(repo, page);
   debug("Removing image cache");
   fs.unlinkSync(banner_filename);
   browser.close();
@@ -29,9 +27,8 @@ async function login(auth, page) {
 
   if (auth.otp) {
     debug("Submitting OTP");
-    await page.waitForSelector("#otp");
-    await page.type("#otp", auth.otp);
-    await page.click('[type="submit"]');
+    await page.waitForSelector("#app_totp");
+    await page.type("#app_totp", auth.otp);
   } else {
     debug("No OTP detected");
   }
@@ -96,14 +93,14 @@ async function downloadImage(repo, imageOptions, browser) {
   var page = await browser.newPage();
 
   // These dimensions come from `viewBox` in the SVG
-  await page.setViewport({ width: 640, height: 320 });
-  await page.setContent(banner);
+  await page.setViewport({ width: 1280, height: 640 });
+  // await page.setContent(banner);
+  await page.goto(url);
 
   var imageBuffer = await page.screenshot({
     type: "png",
   });
   fs.writeFileSync(banner_filename, imageBuffer);
-
   await page.close();
 }
 

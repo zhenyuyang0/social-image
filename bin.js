@@ -4,28 +4,16 @@ const yargs = require("yargs/yargs");
 const { hideBin } = require("yargs/helpers");
 
 const argv = yargs(hideBin(process.argv))
-  .option("pat", {
-    type: "string",
-    description: "GitHub Personal Access Token",
-  })
-  .option("username", {
-    type: "string",
-    description: "GitHub Username",
-  })
-
   .option("password", {
     type: "string",
     description: "GitHub Password",
+    default: process.env.GITHUB_PASSWORD, // Use environment variable as default
   })
 
   .option("otp", {
     type: "string",
     description: "GitHub 2FA Code",
-  })
-
-  .option("target", {
-    type: "string",
-    description: "User/Org/Team to add social images for",
+    default: process.env.GITHUB_OTP, // Use environment variable as default
   })
 
   .option("theme", {
@@ -106,8 +94,7 @@ const argv = yargs(hideBin(process.argv))
     default: false,
     description: "Show puppeteer in the foreground",
   })
-
-  .demandOption(["target"], "This can be the name of a user, org or team").argv;
+  .argv;
 
 (async function (argv) {
   require(".")(argv);

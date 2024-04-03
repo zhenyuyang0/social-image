@@ -7,29 +7,40 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v2
       with:
         ref: ${{ github.event.release.target_commitish }}
-    - name: Use Node.js 12
+    - name: Setup Node.js 12
       uses: actions/setup-node@v1
       with:
         node-version: 12
         registry-url: https://registry.npmjs.org/
-    - run: npm ci
-    - run: git config --global user.name "Michael Heap"
-    - run: git config --global user.email "m@michaelheap.com"
-    - run: npm version ${{ github.event.release.tag_name }}
-    - run: npm run build --if-present
-    - run: npm test --if-present
-    - run: npm publish
+    - name: Install Dependencies
+      run: npm ci
+    - name: Configure Git username 
+      run: git config --global user.name "joel-y85"
+    - name: Configure Git email
+      run: git config --global user.email "joel.yang389@gmail.com"
+    - name: Bump version
+      run: npm version ${{ github.event.release.tag_name }}
+    - name: Build 🔧
+      run: npm run build --if-present
+    - name: Test
+      run: npm test --if-present
+    - name: Publish package on NPM 📦
+      run: npm publish
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-    - run: git push
+    - name: Push changes 
+      run: git push
       env:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-    - run: git tag -f ${{ github.event.release.tag_name }} ${{ github.event.release.target_commitish }}
+    - name: Tag commit 
+      run: git tag -f ${{ github.event.release.tag_name }} ${{ github.event.release.target_commitish }}
       env:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-    - run: git push origin ${{ github.event.release.tag_name }} --force
+    - name: Push tag 
+      run: git push origin ${{ github.event.release.tag_name }} --force
       env:
         github-token: ${{ secrets.GITHUB_TOKEN }}
