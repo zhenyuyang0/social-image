@@ -21,3 +21,4 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           registry: "https://npm.pkg.github.com"
           provenance: true
+          access: public
