@@ -17,6 +17,6 @@ jobs:
       - uses: JS-DevTools/npm-publish@v3
         with:
           token: ${{ secrets.NPM_TOKEN }}
+          registry: "https://registry.npmjs.org/"
           provenance: true
           access: public
-          registry: "https://registry.npmjs.org/"
