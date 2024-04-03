@@ -1,4 +1,4 @@
-# github-social-image
+# social-image
 
 At the moment, there is no Github API for setting social media preview images. This is CLI tool that uses [@mheap](https://github.com/mheap)'s [github-social-image](https://github.com/mheap/github-social-image) to set a social image of the current repo via command.
 
@@ -20,7 +20,7 @@ Authentication details can be provided in the environment or as CLI arguments
 | OTP       | `GITHUB_OTP`         | `--otp`      |
 
 ```bash
-github-social-image \
+social-image \
   --password your_password \
   --theme dark \
   --font inter \
@@ -40,7 +40,7 @@ To debug
 
 ```bash
 DEBUG=gsi:entrypoint,gsi:browser \
-github-social-image \
+social-image \
   --password your_password \
   --theme dark \
   --font inter \
