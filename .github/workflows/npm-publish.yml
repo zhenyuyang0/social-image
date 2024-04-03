@@ -6,7 +6,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     permissions:
-      id_token: write
+      id-token: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
