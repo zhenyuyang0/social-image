@@ -1,13 +1,13 @@
 # social-image
 
-At the moment, there is no Github API for setting social media preview images. This repo is heavily inspired by [@mheap](https://github.com/mheap)'s [github-social-image](https://github.com/mheap/github-social-image). All code credits go to the original author. This is a CLI tool that sets a social image of the current repo via command.
+At the moment, there is no Github API for setting social media preview images. This repo is heavily inspired by [@mheap](https://github.com/mheap)'s [github-social-image](https://github.com/mheap/github-social-image). All credits go to the original author. This is a CLI tool that sets a social image of the current repo via command.
 
 ![Example](https://repository-images.githubusercontent.com/780763339/00295880-b146-45c4-9dc9-38cb593ebec8)
 
 ## Installation
 
 ```bash
-npm install -g @joel-y85/social-image@1.0.0
+npm install -g @joel-y85/social-image
 ```
 
 ## Usage

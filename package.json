@@ -3,7 +3,7 @@
   "repository": {
     "url": "git@github.com:joel-y85/social-image.git"
   },
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "CLI automation tool for adding social image preview to current Github repository using https://socialify.git.ci/",
   "main": "index.js",
   "scripts": {
